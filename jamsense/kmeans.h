@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct record{
-     int 	rssi_rle[RUN_LENGTH][2];
-     uint8_t 	sequence_num;
+struct record {
+  int     rssi_rle[RUN_LENGTH][2];
+  uint8_t sequence_num;
 };
 
 /**
