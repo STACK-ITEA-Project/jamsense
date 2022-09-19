@@ -11,6 +11,12 @@ instructions for the toolchain to build and program devices with
 JamSense can be found in [Contiki-NG toolchain] and
 [Contiki-NG for nRF52840].
 
+Unless explicitly stated otherwise, JamSense sources are distributed under
+the terms of the [3-clause BSD license](LICENSE.md). This license gives
+everyone the right to use and distribute the code, either in binary or
+source code format, as long as the copyright license is retained in
+the source code.
+
 ### Building JamSense
 
 Ensure all git submodules have been initialized:
