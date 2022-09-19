@@ -50,6 +50,21 @@
 #define LOG_MODULE "App"
 #define LOG_LEVEL LOG_LEVEL_INFO
 
+#ifndef WITH_RGB_LEDS
+#if defined(CONTIKI_TARGET_NRF52840) && defined(CONTIKI_BOARD_DONGLE)
+#define WITH_RGB_LEDS 1
+#else
+#define WITH_RGB_LEDS 0
+#endif
+#endif /* WITH_RGB_LEDS */
+
+#if WITH_RGB_LEDS
+#define RGB_LED_SET(l) rgb_led_set(l)
+#define RGB_LED_OFF() rgb_led_off()
+#else
+#define RGB_LED_SET(l)
+#define RGB_LED_OFF()
+#endif /* WITH_RGB_LEDS */
 /*---------------------------------------------------------------------------*/
 
 /* Jamming detection, could be placed in a makefile */
@@ -430,7 +445,7 @@ PROCESS_THREAD(udp_client_process, ev, data)
 	} else {
 
 	  /*Flash led light green*/
-	  rgb_led_set(RGB_LED_GREEN);
+	  RGB_LED_SET(RGB_LED_GREEN);
 	  LOG_INFO("This is the client! \n");
 	  LOG_INFO("Sending request %u to ", count);
 	  LOG_INFO_6ADDR(&dest_ipaddr);
@@ -443,7 +458,7 @@ PROCESS_THREAD(udp_client_process, ev, data)
 	LOG_INFO("Didn't get root_ipaddr\n");
       }
     } else {
-      rgb_led_set(RGB_LED_RED);
+      RGB_LED_SET(RGB_LED_RED);
       LOG_INFO("Not reachable yet: %d\n", cnt);
       if(nr_failures > 20) {
 	nr_failures = 0;
@@ -454,7 +469,7 @@ PROCESS_THREAD(udp_client_process, ev, data)
       cnt++;
     }
 
-    rgb_led_off();
+    RGB_LED_OFF();
   }
 
   PROCESS_END();
